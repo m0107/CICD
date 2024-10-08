@@ -46,8 +46,12 @@ jobs:
             # Log the tag for debugging
             echo "log Building Docker image with tag: $IMAGE_TAG"
         
+            echo "mohit 0"
+
             # Build the Docker image
             docker build -t "$IMAGE_TAG" .
+
+            echo "mohit 1"
 
             #name: Check for Dockerfile
             if [ ! -f Dockerfile ]; then
