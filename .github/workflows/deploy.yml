@@ -25,12 +25,14 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       
-
       - name: Build, tag, and push Docker image to ECR
         run: |
-            docker build -t ${{ steps.login-ecr.outputs.registry }}/${{ secrets.AWS_ECR_REPOSITORY_NAME }}:$GITHUB_SHA .
-            sdocker push ${{ steps.login-ecr.outputs.registry }}/${{ secrets.AWS_ECR_REPOSITORY_NAME }}:$GITHUB_SHA
+            IMAGE_TAG="${{ steps.login-ecr.outputs.registry }}/${{ secrets.AWS_ECR_REPOSITORY_NAME }}:${GITHUB_SHA}"
+            echo "Building Docker image with tag: $IMAGE_TAG"
+            docker build -t $IMAGE_TAG .
+            docker push $IMAGE_TAG
         
+      
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
