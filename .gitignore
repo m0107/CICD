@@ -7,7 +7,6 @@ build/
 *.log
 
 # Docker
-Dockerfile
 .dockerignore
 
 # Terraform
