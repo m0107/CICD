@@ -28,10 +28,9 @@ jobs:
 
       - name: Build, tag, and push Docker image to ECR
         run: |
-          IMAGE_TAG=latest
-          REPOSITORY_URI=$(aws ecr describe-repositories --repository-names my-node-app --output text --query 'repositories[0].repositoryUri')
-          docker build -t $REPOSITORY_URI:$IMAGE_TAG .
-          docker push $REPOSITORY_URI:$IMAGE_TAG
+            docker build -t ${{ steps.login-ecr.outputs.registry }}/${{ secrets.AWS_ECR_REPOSITORY_NAME }}:$GITHUB_SHA .
+            sdocker push ${{ steps.login-ecr.outputs.registry }}/${{ secrets.AWS_ECR_REPOSITORY_NAME }}:$GITHUB_SHA
+        
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
