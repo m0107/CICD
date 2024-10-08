@@ -48,13 +48,15 @@ jobs:
         
             # Build the Docker image
             docker build -t "$IMAGE_TAG" .
+
+            #name: Check for Dockerfile
+            if [ ! -f Dockerfile ]; then
+              echo "Dockerfile not found!"
+              exit 1
+            fi
         
             # Push the Docker image to ECR
-            docker push "$IMAGE_TAG"
-        
-        
-        
-        
+            docker push "$IMAGE_TAG"        
       
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
