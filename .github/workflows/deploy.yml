@@ -49,9 +49,10 @@ jobs:
             echo "mohit 0"
 
             # Build the Docker image
-            docker build -t "$IMAGE_TAG" .
+            docker buildx build -t "$IMAGE_TAG" .
 
             echo "mohit 1"
+            echo "$IMAGE_TAG"
 
             #name: Check for Dockerfile
             if [ ! -f Dockerfile ]; then
