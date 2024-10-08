@@ -19,7 +19,7 @@ jobs:
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
         with:
-          registry-type: "ecr"
+          registry-type: "public"
         env:
           AWS_REGION: us-east-1  # Set your AWS region here
 
